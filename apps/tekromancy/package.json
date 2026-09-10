@@ -1,0 +1,19 @@
+{
+  "name": "@tekromancy/showcase",
+  "version": "1.0.0",
+  "description": "Tekromancy Showcase: High-Voltage Elemental Visual Effects Engine for 3D Presentations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tekromancy/tekromancy": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^8.2.2"
+  },
+  "packageManager": "pnpm@11.24.0"
+}

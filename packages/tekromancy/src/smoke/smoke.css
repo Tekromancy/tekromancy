@@ -1,0 +1,21 @@
+/**
+ * smoke.css - Volumetric smoke & fog atmospheric styling
+ * Part of @tekromancy/tekromancy
+ */
+
+.tekro-smoke-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9995;
+  mix-blend-mode: normal;
+}
+
+.smoke-element-shroud {
+  box-shadow: 0 0 35px rgba(120, 140, 160, 0.65) !important;
+  border-color: rgba(160, 175, 195, 0.8) !important;
+  transition: box-shadow 0.4s ease-out;
+}

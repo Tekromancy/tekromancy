@@ -1,0 +1,31 @@
+/**
+ * fire.css - Convective flame, ember glow and heat distortion styles
+ * Part of @tekromancy/tekromancy
+ */
+
+.tekro-fire-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9996;
+  mix-blend-mode: screen;
+}
+
+.fire-element-glow {
+  box-shadow: 0 0 25px rgba(255, 100, 0, 0.7), inset 0 0 16px rgba(255, 180, 0, 0.45) !important;
+  border-color: rgba(255, 140, 0, 0.9) !important;
+  transition: box-shadow 0.3s cubic-bezier(0.1, 0.9, 0.2, 1), border-color 0.3s ease;
+  animation: fire-pulse 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes fire-pulse {
+  from {
+    filter: drop-shadow(0 0 8px rgba(255, 80, 0, 0.6));
+  }
+  to {
+    filter: drop-shadow(0 0 18px rgba(255, 180, 0, 0.9));
+  }
+}

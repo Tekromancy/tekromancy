@@ -1,0 +1,31 @@
+{
+  "name": "tekromancy-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tekromancy Monorepo",
+  "scripts": {
+    "dev": "pnpm --filter impressctf dev",
+    "dev:impressctf": "pnpm --filter impressctf dev",
+    "dev:tekromancy": "pnpm --filter @tekromancy/showcase dev",
+    "build": "pnpm -r build",
+    "build:package": "pnpm --filter @tekromancy/tekromancy build",
+    "build:impressctf": "pnpm --filter impressctf build",
+    "build:tekromancy": "pnpm --filter @tekromancy/showcase build",
+    "preview:impressctf": "pnpm --filter impressctf preview",
+    "preview:tekromancy": "pnpm --filter @tekromancy/showcase preview",
+    "start": "pnpm --filter impressctf preview",
+    "test": "pnpm -r test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.24.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@11.24.0",
+  "type": "module"
+}

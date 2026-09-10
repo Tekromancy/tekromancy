@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tekromancy: High-Voltage Elemental Visual FX Engine for Web Presentations</title>
+  <meta name="description" content="Interactive 3D presentation showcasing @tekromancy/tekromancy - procedural lightning, fire, smoke, plasma, water, and ice visual effects for modern presentations.">
+  
+  <link rel="stylesheet" href="css/impress-common.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="impress-not-supported">
+
+  <!-- Lightning & Impact Flash Overlay -->
+  <div id="lightning-flash-overlay" aria-hidden="true"></div>
+
+  <!-- Fallback message for unsupported browsers -->
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best 3D cyber visual experience, please use the latest version of Chrome, Firefox, Safari, or Edge.</p>
+  </div>
+
+  <!-- HEADS-UP DISPLAY (HUD) TOP BAR -->
+  <header id="hud-header">
+    <div class="hud-brand">
+      <div class="hud-status-dot"></div>
+      <span class="hud-brand-tag">TEKROMANCY // FX ENGINE</span>
+    </div>
+
+    <div class="hud-center-title">
+      STATION: <span id="hud-step-title">Orbital Gateway</span>
+    </div>
+
+    <div class="hud-controls">
+      <button id="btn-prev" class="hud-btn" title="Previous Station (Left Arrow / Backspace)">
+        <span>◀ Prev</span>
+      </button>
+      <select id="hud-jump-menu" aria-label="Jump to station"></select>
+      <button id="btn-next" class="hud-btn" title="Next Station (Space / Right Arrow)">
+        <span>Next ▶</span>
+      </button>
+      <button id="btn-overview" class="hud-btn" title="Constellation Overview (O)">
+        <span>Overview</span>
+      </button>
+      <button id="btn-autoplay" class="hud-btn" title="Toggle Autoplay (6s per slide)">
+        <span>Autoplay</span>
+      </button>
+      <button id="btn-mute" class="hud-btn" title="Toggle Audio FX (M)">
+        <span>Mute</span>
+      </button>
+      <button id="btn-fullscreen" class="hud-btn" title="Toggle Fullscreen (F)">
+        <span>Fullscreen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HUD FOOTER PROGRESS BAR -->
+  <footer id="hud-footer">
+    <div id="hud-progress-bar">
+      <div id="hud-progress-fill"></div>
+    </div>
+    <div>
+      <span class="hud-counter">STATION <span id="hud-step-current">00</span> / <span id="hud-step-total">10</span></span>
+    </div>
+    <div class="hud-hints">
+      <span><kbd>SPACE</kbd> Next</span>
+      <span><kbd>←</kbd> Prev</span>
+      <span><kbd>O</kbd> Overview</span>
+      <span><kbd>M</kbd> Mute</span>
+      <span><kbd>F</kbd> Fullscreen</span>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       IMPRESS PRESENTATION CANVAS (1800ms duration for multi-rotation sweeps)
+       ====================================================================== -->
+  <div id="impress" data-transition-duration="1800">
+
+    <!-- ====================================================================
+         3D IN-DOM CYBERPUNK GLOBE MESH (Centered at 0, 0, 0)
+         ==================================================================== -->
+    <div class="cyber-globe-mesh" aria-hidden="true">
+      <div class="globe-core-beacon"></div>
+      <div class="globe-ring globe-ring-equator"></div>
+      <div class="globe-ring globe-ring-meridian-0"></div>
+      <div class="globe-ring globe-ring-meridian-45"></div>
+      <div class="globe-ring globe-ring-meridian-90"></div>
+      <div class="globe-ring globe-ring-meridian-135"></div>
+      <div class="globe-ring globe-ring-lat-north"></div>
+      <div class="globe-ring globe-ring-lat-south"></div>
+      <div class="globe-ring globe-ring-orbital"></div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 00: ORBITAL GATEWAY
+         ==================================================================== -->
+    <div id="tekromancy-portal" class="step"
+         data-x="0" data-y="-14000" data-z="28000"
+         data-rotate-x="-35" data-rotate-y="60" data-rotate-z="720"
+         data-scale="8"
+         data-title="Orbital Gateway"
+         data-lightning="40">
+      
+      <div class="portal-badge">TEKROMANCY FX // PROCEDURAL WEB VISUAL ENGINE</div>
+      <h1 class="portal-hero-title">TEKROMANCY</h1>
+      <p class="portal-subtitle">
+        High-voltage, physics-driven procedural visual effects library for web presentations, terminals, and interactive interfaces. 
+        Zero dependencies. Pure Canvas 2D + Web Audio.
+      </p>
+
+      <div>
+        <button id="btn-start-presentation" class="start-btn">⚡ ENTER CYBERSPACE ⚡</button>
+      </div>
+      <div style="margin-top: 24px; font-family: var(--font-mono); font-size: 13px; color: var(--cyan);">
+        [ CLICK BUTTON OR PRESS SPACE TO INITIATE HYPER-WARP PLUNGE ]
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 01: THE MANIFESTO (Prime Meridian: Lat 0°, Lon 0°, R=9000)
+         ==================================================================== -->
+    <div id="manifesto" class="step"
+         data-x="0" data-y="0" data-z="9000"
+         data-rotate-x="0" data-rotate-y="0" data-rotate-z="0"
+         data-scale="1"
+         data-title="The Manifesto"
+         data-lightning="75" data-plasma="40">
+
+      <h1 class="station-title glow-cyan">The Tekromancy Manifesto</h1>
+      <p class="station-desc">
+        Presentations are theatrical performances. Static bullet points are dead. Tekromancy injects visceral, procedural visual and auditory atmosphere into browser slide decks.
+      </p>
+
+      <div class="grid-3">
+        <div class="cyber-card">
+          <h2 class="section-heading">01 // Zero Bloat</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            100% vanilla Canvas 2D and Web Audio API. 60 FPS hardware-accelerated loops with <b>zero</b> Three.js, WebGL, or bundle bloat. Single-digit kilobyte footprint.
+          </p>
+        </div>
+
+        <div class="cyber-card">
+          <h2 class="section-heading">02 // 6 Elemental Engines</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Lightning, Convective Fire, Volumetric Smoke, High-Voltage Plasma, Hydrodynamic Water, and Sub-Zero Ice. Import individual modules or orchestrate compound storms.
+          </p>
+        </div>
+
+        <div class="cyber-card">
+          <h2 class="section-heading">03 // Slide Framework Native</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Automate presentation transitions with intuitive 1–100 intensity scales via JavaScript controller or declarative HTML5 <code class="code-str">data-*</code> attributes.
+          </p>
+        </div>
+      </div>
+
+      <div class="interactive-deck">
+        <div class="deck-header">
+          <span class="deck-title">INTERACTIVE SANDBOX // MANIFESTO DECK</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">LIVE PROCEDURAL ENGINE</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-test-manifesto-fx" class="fx-trigger-btn">⚡ Compound Storm</button>
+          <button id="btn-manifesto-encircle" class="fx-trigger-btn">✨ Encircle 3 Cards</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 02: LIGHTNING & ARCANE ELECTRICITY
+         ==================================================================== -->
+    <div id="station-lightning" class="step"
+         data-x="5619" data-y="-4225" data-z="5619"
+         data-rotate-x="-28" data-rotate-y="405" data-rotate-z="360"
+         data-scale="1"
+         data-title="Lightning Engine"
+         data-lightning="85">
+
+      <h1 class="station-title glow-cyan">01 // Lightning & Arcane Electricity</h1>
+      <p class="station-desc">
+        Recursive midpoint-displacement fractal branching with chromatic ion glow, screen flash diffusion, and DOM element encircle arcs.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { LightningGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/lightning'</span>;
+
+<span class="code-keyword">const</span> lightning = <span class="code-keyword">new</span> <span class="code-func">LightningGenerator</span>({
+  theme: <span class="code-str">'cyan'</span>,
+  flashOverlayId: <span class="code-str">'lightning-flash-overlay'</span>
+});
+
+<span class="code-comment">// Strike between coordinates</span>
+lightning.<span class="code-func">strike</span>(startX, startY, targetX, targetY);
+
+<span class="code-comment">// Encircle any DOM element</span>
+lightning.<span class="code-func">encircle</span>(<span class="code-str">'#my-card'</span>, { duration: 2000 });
+
+<span class="code-comment">// Ion storm transition</span>
+lightning.<span class="code-func">startStorm</span>(2500, 85);</code></pre>
+        </div>
+
+        <div id="lightning-demo-card" class="cyber-card">
+          <h2 class="section-heading glow-cyan">High-Voltage Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for perimeter ion wrapping, direct arc discharge strikes, and atmospheric screen flashes.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan); line-height: 1.8;">
+            ► Algorithm: Recursive Midpoint Displacement<br>
+            ► Ion Glow: Gaussian Radial Blur (mix-blend: screen)<br>
+            ► Branch Probability: 0.28 per recursive level<br>
+            ► Audio: Synthetic low-pass resonant thunder crack
+          </div>
+          <div id="lightning-substep-demo" class="substep portal-badge" data-fx="lightning" style="margin-top: 14px; margin-bottom: 0;">
+            ⚡ REVEALED SUBSTEP // ENCIRCLING ARC DISCHARGE
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck">
+        <div class="deck-header">
+          <span class="deck-title">INTERACTIVE EXPERIMENT DECK // LIGHTNING</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan);">CANVAS: 2D ACCELERATED</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-lightning-strike" class="fx-trigger-btn">⚡ Direct Bolt Strike</button>
+          <button id="btn-lightning-encircle" class="fx-trigger-btn">✨ Encircle Target Card</button>
+          <button id="btn-lightning-highlight" class="fx-trigger-btn">⚡ Highlight New Substep</button>
+          <button id="btn-lightning-flash" class="fx-trigger-btn">💥 Screen Flash</button>
+          <button id="btn-lightning-storm" class="fx-trigger-btn">🌩️ Ion Storm (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 03: CONVECTIVE FIRE & INFERNO (Lat -22°, Lon 90°)
+         ==================================================================== -->
+    <div id="station-fire" class="step"
+         data-x="8345" data-y="3371" data-z="0"
+         data-rotate-x="22" data-rotate-y="810" data-rotate-z="720"
+         data-scale="1"
+         data-title="Fire Engine"
+         data-fire="90">
+
+      <h1 class="station-title glow-fire">02 // Convective Fire & Inferno</h1>
+      <p class="station-desc">
+        Physics-driven convective buoyancy simulation with turbulent horizontal draft, expanding thermal radii, core-to-amber color blending, and rising embers.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading glow-fire">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { FireGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/fire'</span>;
+
+<span class="code-keyword">const</span> fire = <span class="code-keyword">new</span> <span class="code-func">FireGenerator</span>({
+  theme: <span class="code-str">'fire'</span>,
+  maxParticles: 350
+});
+
+<span class="code-comment">// Explosive thermal fireball burst</span>
+fire.<span class="code-func">burst</span>(centerX, centerY, 60);
+
+<span class="code-comment">// Ignite perimeter flames along borders</span>
+fire.<span class="code-func">encircle</span>(<span class="code-str">'#fire-card'</span>, { duration: 2200 });
+
+<span class="code-comment">// Full-screen inferno transition</span>
+fire.<span class="code-func">startInferno</span>(2500, 90);</code></pre>
+        </div>
+
+        <div id="fire-demo-card" class="cyber-card" style="border-color: var(--border-fire);">
+          <h2 class="section-heading glow-fire">Thermal Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for convective edge ignition, explosive fireball bursts, and ambient rising embers.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--fire); line-height: 1.8;">
+            ► Buoyancy Vector: Vertical acceleration -0.18px/frame<br>
+            ► Thermal Drift: Sinusoidal horizontal turbulence<br>
+            ► Color Spectrum: White-hot core → Gold → Crimson → Smoke<br>
+            ► Audio: Bandpass filtered sawtooth combustion
+          </div>
+          <div id="fire-substep-demo" class="substep portal-badge" data-fx="fire" style="margin-top: 14px; margin-bottom: 0; border-color: var(--border-fire); color: var(--fire);">
+            🔥 REVEALED SUBSTEP // CONVECTIVE IGNITION
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: var(--border-fire);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--fire);">INTERACTIVE EXPERIMENT DECK // FIRE</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--fire);">THERMAL SIMULATION</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-fire-burst" class="fx-trigger-btn btn-fire">🔥 Spawn Fireball</button>
+          <button id="btn-fire-encircle" class="fx-trigger-btn btn-fire">✨ Ignite Perimeter</button>
+          <button id="btn-fire-highlight" class="fx-trigger-btn btn-fire">🔥 Highlight New Substep</button>
+          <button id="btn-fire-inferno" class="fx-trigger-btn btn-fire">🌋 Screen Inferno (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 04: VOLUMETRIC SMOKE & HAZE (Lat +32°, Lon 135°)
+         ==================================================================== -->
+    <div id="station-smoke" class="step"
+         data-x="5397" data-y="-4769" data-z="-5397"
+         data-rotate-x="-32" data-rotate-y="1215" data-rotate-z="1080"
+         data-scale="1"
+         data-title="Smoke Engine"
+         data-smoke="85">
+
+      <h1 class="station-title glow-smoke" style="color: var(--smoke);">03 // Volumetric Smoke & Haze</h1>
+      <p class="station-desc">
+        Soft alpha-blended radial gradients with atmospheric air drag deceleration, expanding puff particle radius, and tactical element engulfment.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading" style="color: var(--smoke);">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { SmokeGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/smoke'</span>;
+
+<span class="code-keyword">const</span> smoke = <span class="code-keyword">new</span> <span class="code-func">SmokeGenerator</span>({
+  theme: <span class="code-str">'stealth'</span>,
+  maxParticles: 250
+});
+
+<span class="code-comment">// Tactical smoke poof</span>
+smoke.<span class="code-func">poof</span>(centerX, centerY, 45);
+
+<span class="code-comment">// Engulf DOM element with dense billows</span>
+smoke.<span class="code-func">engulf</span>(<span class="code-str">'#smoke-card'</span>, { duration: 2200 });
+
+<span class="code-comment">// Atmospheric ground haze / fog</span>
+smoke.<span class="code-func">startHaze</span>(2500, 80);</code></pre>
+        </div>
+
+        <div id="smoke-demo-card" class="cyber-card" style="border-color: var(--border-smoke);">
+          <h2 class="section-heading" style="color: var(--smoke);">Volumetric Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for perimeter billow engulfment, tactical cover clouds, and low-altitude atmospheric fog.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--smoke); line-height: 1.8;">
+            ► Aerodynamic Drag: 0.94 velocity damping factor<br>
+            ► Particle Expansion: Radial expansion from 12px to 95px<br>
+            ► Blending: Soft non-additive alpha composition<br>
+            ► Audio: Dynamic bandpass white noise decompression
+          </div>
+          <div id="smoke-substep-demo" class="substep portal-badge" data-fx="smoke" style="margin-top: 14px; margin-bottom: 0; border-color: var(--border-smoke); color: var(--smoke);">
+            💨 REVEALED SUBSTEP // TACTICAL SMOKE BILLOW
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: var(--border-smoke);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--smoke);">INTERACTIVE EXPERIMENT DECK // SMOKE</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--smoke);">ATMOSPHERIC OCCLUSION</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-smoke-poof" class="fx-trigger-btn btn-smoke">💨 Tactical Smoke Poof</button>
+          <button id="btn-smoke-engulf" class="fx-trigger-btn btn-smoke">🌫️ Engulf Target Card</button>
+          <button id="btn-smoke-highlight" class="fx-trigger-btn btn-smoke">💨 Highlight New Substep</button>
+          <button id="btn-smoke-haze" class="fx-trigger-btn btn-smoke">☁️ Deploy Ground Fog (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 05: HIGH-VOLTAGE PLASMA & TESLA ORBS (Lat -18°, Lon 180°)
+         ==================================================================== -->
+    <div id="station-plasma" class="step"
+         data-x="0" data-y="2781" data-z="-8560"
+         data-rotate-x="18" data-rotate-y="1620" data-rotate-z="1440"
+         data-scale="1"
+         data-title="Plasma Engine"
+         data-plasma="90">
+
+      <h1 class="station-title glow-plasma">04 // High-Voltage Plasma & Tesla Orbs</h1>
+      <p class="station-desc">
+        Sinusoidal oscillatory phase arcs with chromatic aberration (cyan/magenta color separation), pulsing Tesla containment fields, and magnetic tempests.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading glow-plasma">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { PlasmaGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/plasma'</span>;
+
+<span class="code-keyword">const</span> plasma = <span class="code-keyword">new</span> <span class="code-func">PlasmaGenerator</span>({
+  theme: <span class="code-str">'hyper'</span>,
+  chromaticAberration: <span class="code-keyword">true</span>
+});
+
+<span class="code-comment">// High-frequency Tesla orb with radiating arcs</span>
+plasma.<span class="code-func">orb</span>(centerX, centerY, 75, { duration: 2000 });
+
+<span class="code-comment">// Magnetic containment field encircle</span>
+plasma.<span class="code-func">encircle</span>(<span class="code-str">'#plasma-card'</span>, { duration: 2000 });
+
+<span class="code-comment">// Chromatic plasma tempest</span>
+plasma.<span class="code-func">startTempest</span>(2500, 85);</code></pre>
+        </div>
+
+        <div id="plasma-demo-card" class="cyber-card" style="border-color: var(--border-plasma);">
+          <h2 class="section-heading glow-plasma">Magnetic Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for pulsing Tesla containment fields, chromatic aberration split arcs, and electromagnetic tempests.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--plasma); line-height: 1.8;">
+            ► Arc Mathematics: Double-frequency sine wave + noise jitter<br>
+            ► Chromatic Aberration: Sub-pixel cyan/magenta offset layers<br>
+            ► Tesla Emitter: Radial multi-tendril plasma core<br>
+            ► Audio: Dual-oscillator detuned triangle/sine beat hum
+          </div>
+          <div id="plasma-substep-demo" class="substep portal-badge" data-fx="plasma" style="margin-top: 14px; margin-bottom: 0; border-color: var(--border-plasma); color: var(--plasma);">
+            🔮 REVEALED SUBSTEP // MAGNETIC PHASE ARCS
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: var(--border-plasma);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--plasma);">INTERACTIVE EXPERIMENT DECK // PLASMA</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--plasma);">ELECTROMAGNETIC FIELD</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-plasma-orb" class="fx-trigger-btn btn-plasma">🔮 Spawn Tesla Orb</button>
+          <button id="btn-plasma-containment" class="fx-trigger-btn btn-plasma">⚡ Containment Field</button>
+          <button id="btn-plasma-highlight" class="fx-trigger-btn btn-plasma">🔮 Highlight New Substep</button>
+          <button id="btn-plasma-tempest" class="fx-trigger-btn btn-plasma">🌀 Plasma Tempest (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 06: HYDRODYNAMIC WATER & RIPPLES (Lat +28°, Lon 225°)
+         ==================================================================== -->
+    <div id="station-water" class="step"
+         data-x="-5619" data-y="-4225" data-z="-5619"
+         data-rotate-x="-28" data-rotate-y="2025" data-rotate-z="1800"
+         data-scale="1"
+         data-title="Water Engine"
+         data-water="85">
+
+      <h1 class="station-title glow-water">05 // Hydrodynamic Water & Ripples</h1>
+      <p class="station-desc">
+        Concentric expanding elliptical ripple wave equations, surface tension damping decay, gravity-accelerated droplet spray, and torrential rain downpours.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading glow-water">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { WaterGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/water'</span>;
+
+<span class="code-keyword">const</span> water = <span class="code-keyword">new</span> <span class="code-func">WaterGenerator</span>({
+  theme: <span class="code-str">'cyan'</span>,
+  maxRipples: 100
+});
+
+<span class="code-comment">// Fluid droplet splash & ripple wave</span>
+water.<span class="code-func">splash</span>(centerX, centerY, { dropletCount: 16 });
+
+<span class="code-comment">// Perimeter cascading water rings</span>
+water.<span class="code-func">encircle</span>(<span class="code-str">'#water-card'</span>, { duration: 2200 });
+
+<span class="code-comment">// Torrential downpour transition</span>
+water.<span class="code-func">startRain</span>(2500, 85);</code></pre>
+        </div>
+
+        <div id="water-demo-card" class="cyber-card" style="border-color: rgba(56,189,248,0.4);">
+          <h2 class="section-heading glow-water">Fluid Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for perimeter ripple drops, splash cascades, and hydrodynamic wave propagation.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--water); line-height: 1.8;">
+            ► Wave Equation: Concentric 2D elliptical expansion<br>
+            ► Surface Tension: Exponential amplitude decay damping<br>
+            ► Splash Ballistics: Parabolic droplet gravity spray<br>
+            ► Audio: Resonant frequency-swept sine droplet splash
+          </div>
+          <div id="water-substep-demo" class="substep portal-badge" data-fx="water" style="margin-top: 14px; margin-bottom: 0; border-color: rgba(56,189,248,0.5); color: var(--water);">
+            💧 REVEALED SUBSTEP // HYDRODYNAMIC RIPPLE CASCADE
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: rgba(56,189,248,0.4);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--water);">INTERACTIVE EXPERIMENT DECK // WATER</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--water);">HYDRODYNAMICS</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-water-splash" class="fx-trigger-btn btn-water">💧 Droplet Splash</button>
+          <button id="btn-water-ripple" class="fx-trigger-btn btn-water">🌊 Ripple Cascade</button>
+          <button id="btn-water-highlight" class="fx-trigger-btn btn-water">💧 Highlight New Substep</button>
+          <button id="btn-water-rain" class="fx-trigger-btn btn-water">🌧️ Rain Downpour (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 07: DENDRITIC ICE & SUB-ZERO FROST (Lat -24°, Lon 270°)
+         ==================================================================== -->
+    <div id="station-ice" class="step"
+         data-x="-8222" data-y="3660" data-z="0"
+         data-rotate-x="24" data-rotate-y="2430" data-rotate-z="2160"
+         data-scale="1"
+         data-title="Ice Engine"
+         data-ice="90">
+
+      <h1 class="station-title glow-ice">06 // Dendritic Ice & Sub-Zero Frost</h1>
+      <p class="station-desc">
+        Dendritic 60° Koch-snowflake hexagonal crystal branching, perimeter frost creeping along DOM element borders, and crystalline fragment shattering.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading glow-ice">Usage Recipe</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { IceGenerator } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy/ice'</span>;
+
+<span class="code-keyword">const</span> ice = <span class="code-keyword">new</span> <span class="code-func">IceGenerator</span>({
+  theme: <span class="code-str">'frost'</span>,
+  maxCrystals: 120
+});
+
+<span class="code-comment">// High-velocity crystalline shatter</span>
+ice.<span class="code-func">shatter</span>(centerX, centerY, { count: 35 });
+
+<span class="code-comment">// Creep dendritic frost across DOM borders</span>
+ice.<span class="code-func">freeze</span>(<span class="code-str">'#ice-card'</span>, { duration: 2400 });
+
+<span class="code-comment">// Sub-zero blizzard flurry transition</span>
+ice.<span class="code-func">startBlizzard</span>(2500, 90);</code></pre>
+        </div>
+
+        <div id="ice-demo-card" class="cyber-card" style="border-color: var(--border-ice);">
+          <h2 class="section-heading glow-ice">Cryogenic Target Card</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Target element for dendritic border crystallization, sub-zero frost creep, and crystalline fragment shattering.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ice); line-height: 1.8;">
+            ► Crystal Geometry: Hexagonal 60° dendritic branch recursions<br>
+            ► Frost Creep: Outward border growth from all 4 card edges<br>
+            ► Shatter Physics: Angular velocity + drag decay on polygon shards<br>
+            ► Audio: High-frequency crystalline square wave chirp & fracture
+          </div>
+          <div id="ice-substep-demo" class="substep portal-badge" data-fx="ice" style="margin-top: 14px; margin-bottom: 0; border-color: var(--border-ice); color: var(--ice);">
+            ❄️ REVEALED SUBSTEP // 60° DENDRITIC FROST
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: var(--border-ice);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--ice);">INTERACTIVE EXPERIMENT DECK // ICE</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ice);">CRYOGENIC CRYSTALLIZATION</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-ice-shatter" class="fx-trigger-btn btn-ice">❄️ Crystalline Shatter</button>
+          <button id="btn-ice-freeze" class="fx-trigger-btn btn-ice">🧊 Creep Frost</button>
+          <button id="btn-ice-highlight" class="fx-trigger-btn btn-ice">❄️ Highlight New Substep</button>
+          <button id="btn-ice-blizzard" class="fx-trigger-btn btn-ice">🌨️ Sub-Zero Blizzard (2.5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 08: THE UNIFIED ORCHESTRATOR (Lat +30°, Lon 315°)
+         ==================================================================== -->
+    <div id="station-unified" class="step"
+         data-x="-5511" data-y="-4500" data-z="5511"
+         data-rotate-x="-30" data-rotate-y="2835" data-rotate-z="2520"
+         data-scale="1"
+         data-title="Unified FX"
+         data-lightning="75" data-fire="60" data-plasma="70" data-ice="50">
+
+      <h1 class="station-title" style="color: var(--gold);">07 // The Unified Orchestrator</h1>
+      <p class="station-desc">
+        Command all 6 elemental forces simultaneously through a single high-performance coordinator. Synchronized 60 FPS render loops with intelligent canvas blending.
+      </p>
+
+      <div class="grid-2">
+        <div class="cyber-card">
+          <h2 class="section-heading" style="color: var(--gold);">Unified Architecture</h2>
+          <pre class="code-box"><code><span class="code-keyword">import</span> { TekromancyFX } <span class="code-keyword">from</span> <span class="code-str">'@tekromancy/tekromancy'</span>;
+
+<span class="code-keyword">const</span> fx = <span class="code-keyword">new</span> <span class="code-func">TekromancyFX</span>();
+
+<span class="code-comment">// Trigger multi-element apocalyptic tempest</span>
+fx.<span class="code-func">storm</span>({
+  lightning: <span class="code-str">85</span>,
+  fire: <span class="code-str">70</span>,
+  plasma: <span class="code-str">80</span>,
+  ice: <span class="code-str">60</span>
+}, 3000);
+
+<span class="code-comment">// Compound multi-element element encircle</span>
+fx.<span class="code-func">encircle</span>(<span class="code-str">'#demo'</span>, [<span class="code-str">'lightning'</span>, <span class="code-str">'fire'</span>, <span class="code-str">'plasma'</span>, <span class="code-str">'ice'</span>]);</code></pre>
+        </div>
+
+        <div id="unified-demo-card" class="cyber-card" style="border-color: var(--border-gold);">
+          <h2 class="section-heading" style="color: var(--gold);">Composite Multi-Element Target</h2>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Coordinated canvas rendering stack. All six procedural engines operate independently while sharing timeline synchronization.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--gold); line-height: 1.8;">
+            ► Composition Stack: Separate canvas layers per visual element<br>
+            ► Screen Blending: Hardware additive color overlays<br>
+            ► Memory Management: Automatic lifecycle teardown & GC<br>
+            ► Scale: 1–100 normalized intensity cross-element mapping
+          </div>
+          <div id="unified-substep-demo" class="substep portal-badge" data-fx="lightning,fire,plasma,ice" style="margin-top: 14px; margin-bottom: 0; border-color: var(--border-gold); color: var(--gold);">
+            ⚡🔥🔮❄️ REVEALED SUBSTEP // QUAD-ELEMENTAL FUSION
+          </div>
+        </div>
+      </div>
+
+      <div class="interactive-deck" style="border-color: var(--border-gold);">
+        <div class="deck-header">
+          <span class="deck-title" style="color: var(--gold);">INTERACTIVE EXPERIMENT DECK // ALL-ELEMENT COMPOUND</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--gold);">MULTI-CANVAS ORCHESTRATION</span>
+        </div>
+        <div class="deck-buttons">
+          <button id="btn-unified-storm" class="fx-trigger-btn" style="border-color: var(--gold); color: #fff; background: rgba(251,191,36,0.18);">⚡ Elemental Tempest Storm</button>
+          <button id="btn-unified-encircle" class="fx-trigger-btn">✨ Encircle All 4 Elements</button>
+          <button id="btn-unified-highlight" class="fx-trigger-btn" style="border-color: var(--gold); color: #fff; background: rgba(251,191,36,0.22);">⚡🔥 Highlight Substep</button>
+          <button id="btn-unified-clear" class="fx-trigger-btn">🧹 Clear All Canvases</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 09: SLIDE FRAMEWORK INTEGRATION GUIDE (Lat -48°, Lon 360°)
+         ==================================================================== -->
+    <div id="station-guide" class="step"
+         data-x="0" data-y="6688" data-z="6022"
+         data-rotate-x="48" data-rotate-y="3240" data-rotate-z="2880"
+         data-scale="1"
+         data-title="Integration Guide"
+         data-lightning="50" data-plasma="50">
+
+      <h1 class="station-title glow-cyan">08 // Presentation Framework Guide</h1>
+      <p class="station-desc">
+        Drop Tekromancy into any presentation framework in minutes. Use StationFXController to automatically modulate elemental intensity per slide.
+      </p>
+
+      <div class="grid-3">
+        <div class="cyber-card">
+          <h2 class="section-heading">impress.js</h2>
+          <pre class="code-box"><code>document.<span class="code-func">addEventListener</span>(
+  <span class="code-str">'impress:stepenter'</span>,
+  (e) => {
+    <span class="code-keyword">const</span> fx = ctrl.<span class="code-func">get</span>(e.target);
+    tekro.<span class="code-func">storm</span>(fx);
+  }
+);</code></pre>
+        </div>
+
+        <div class="cyber-card">
+          <h2 class="section-heading">Reveal.js</h2>
+          <pre class="code-box"><code>Reveal.<span class="code-func">on</span>(
+  <span class="code-str">'slidechanged'</span>,
+  (e) => {
+    <span class="code-keyword">const</span> fx = ctrl.<span class="code-func">get</span>(
+      e.currentSlide
+    );
+    tekro.<span class="code-func">storm</span>(fx);
+  }
+);</code></pre>
+        </div>
+
+        <div class="cyber-card">
+          <h2 class="section-heading">HTML5 Data Tags</h2>
+          <pre class="code-box"><code><span class="code-comment">&lt;!-- Auto-detected --&gt;</span>
+&lt;div <span class="code-keyword">class</span>=<span class="code-str">"step"</span>
+  data-lightning=<span class="code-str">"80"</span>
+  data-fire=<span class="code-str">"60"</span>
+  data-ice=<span class="code-str">"40"</span>&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="interactive-deck">
+        <div class="deck-header">
+          <span class="deck-title">GET STARTED WITH TEKROMANCY TODAY</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan);">NPM REGISTRY</span>
+        </div>
+        <div class="deck-buttons" style="align-items: center; justify-content: space-between;">
+          <div style="font-family: var(--font-mono); font-size: 13px; color: #fff; background: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: 4px; border: 1px solid rgba(0,240,255,0.3);">
+            $ npm install @tekromancy/tekromancy
+          </div>
+          <button id="btn-copy-install" class="fx-trigger-btn">📋 Copy Command</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STATION 10: 3D CYBERPUNK GLOBE CONSTELLATION OVERVIEW
+         ==================================================================== -->
+    <div id="overview" class="step"
+         data-x="0" data-y="0" data-z="24000"
+         data-rotate-x="0" data-rotate-y="3600" data-rotate-z="3600"
+         data-scale="18"
+         data-title="3D Constellation"
+         data-lightning="60" data-plasma="50" data-fire="30">
+
+      <div class="overview-header-zone">
+        <h1 class="station-title glow-cyan" style="font-size: 40px; margin-bottom: 4px;">TEKROMANCY CYBER GLOBE</h1>
+        <p class="station-desc" style="font-size: 16px; margin-bottom: 14px;">
+          9 ACTIVE ORBITAL STATIONS ENCIRCLING THE 3D HOLOGRAPHIC CORE
+        </p>
+        <div class="overview-telemetry-strip">
+          <span>ORBITAL RADIUS: <strong>9,000 KM</strong></span>
+          <span>STATION SPACING: <strong>7,500 KM</strong></span>
+          <span>ORBITAL SYNC: <strong>360° FULL-ROLL</strong></span>
+          <span>SYSTEM STATUS: <strong>ALL 6 FX ENGINES ONLINE</strong></span>
+        </div>
+      </div>
+
+      <div class="constellation-stations-grid">
+        <div class="orbital-node-card" data-goto="manifesto">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge glow-cyan">STATION 01</span>
+            <span class="orbital-node-glyph">📜</span>
+          </div>
+          <div class="orbital-node-title">The Manifesto</div>
+          <div class="orbital-node-coords">Lat 00° // Lon 000° (Prime)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-lightning">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--cyan);">STATION 02</span>
+            <span class="orbital-node-glyph">⚡</span>
+          </div>
+          <div class="orbital-node-title">Lightning Engine</div>
+          <div class="orbital-node-coords">Lat +28° // Lon 045° (NE)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-fire">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--fire);">STATION 03</span>
+            <span class="orbital-node-glyph">🔥</span>
+          </div>
+          <div class="orbital-node-title">Fire Engine</div>
+          <div class="orbital-node-coords">Lat -22° // Lon 090° (E)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-smoke">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--smoke);">STATION 04</span>
+            <span class="orbital-node-glyph">💨</span>
+          </div>
+          <div class="orbital-node-title">Smoke Engine</div>
+          <div class="orbital-node-coords">Lat +32° // Lon 135° (SE)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-plasma">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--plasma);">STATION 05</span>
+            <span class="orbital-node-glyph">🔮</span>
+          </div>
+          <div class="orbital-node-title">Plasma Engine</div>
+          <div class="orbital-node-coords">Lat -18° // Lon 180° (Antipode)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-water">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--water);">STATION 06</span>
+            <span class="orbital-node-glyph">💧</span>
+          </div>
+          <div class="orbital-node-title">Water Engine</div>
+          <div class="orbital-node-coords">Lat +28° // Lon 225° (SW)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-ice">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--ice);">STATION 07</span>
+            <span class="orbital-node-glyph">❄️</span>
+          </div>
+          <div class="orbital-node-title">Ice Engine</div>
+          <div class="orbital-node-coords">Lat -24° // Lon 270° (W)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-unified">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: var(--gold);">STATION 08</span>
+            <span class="orbital-node-glyph">⚡🔥</span>
+          </div>
+          <div class="orbital-node-title">Unified Orchestrator</div>
+          <div class="orbital-node-coords">Lat +30° // Lon 315° (NW)</div>
+        </div>
+
+        <div class="orbital-node-card" data-goto="station-guide">
+          <div class="orbital-node-top">
+            <span class="orbital-node-badge" style="color: #22ee44;">STATION 09</span>
+            <span class="orbital-node-glyph">💻</span>
+          </div>
+          <div class="orbital-node-title">Integration Guide</div>
+          <div class="orbital-node-coords">Lat -48° // Lon 360° (Polar)</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; font-family: var(--font-mono); font-size: 13px; color: var(--cyan);">
+        [ CLICK ANY ORBITAL NODE CARD OR USE ARROW KEYS / SPACE TO DIVE INTO THE CYBER GLOBE ]
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/impress.js"></script>
+  <script src="js/audio-fx.js"></script>
+  <script src="js/cyber-canvas.js"></script>
+  <script type="module" src="js/presentation.js"></script>
+</body>
+</html>

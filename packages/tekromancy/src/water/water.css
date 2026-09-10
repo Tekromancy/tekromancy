@@ -1,0 +1,26 @@
+/**
+ * water.css - Fluid water ripples, rain and caustics styles
+ * Part of @tekromancy/tekromancy
+ */
+
+.tekro-water-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: screen;
+}
+
+.water-element-ripple {
+  box-shadow: 0 0 24px rgba(0, 200, 255, 0.65), inset 0 0 14px rgba(100, 230, 255, 0.45) !important;
+  border-color: rgba(0, 220, 255, 0.85) !important;
+  animation: water-sheen 1s infinite alternate ease-in-out;
+}
+
+@keyframes water-sheen {
+  from { filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.5)); }
+  to { filter: drop-shadow(0 0 18px rgba(120, 240, 255, 0.9)); }
+}

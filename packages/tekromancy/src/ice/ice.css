@@ -1,0 +1,27 @@
+/**
+ * ice.css - Sub-zero frost crystallization & frozen glass styles
+ * Part of @tekromancy/tekromancy
+ */
+
+.tekro-ice-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+}
+
+.ice-element-frozen {
+  box-shadow: 0 0 28px rgba(140, 220, 255, 0.85), inset 0 0 16px rgba(220, 245, 255, 0.6) !important;
+  border-color: rgba(180, 235, 255, 0.95) !important;
+  backdrop-filter: blur(4px);
+  animation: ice-sparkle 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes ice-sparkle {
+  from { filter: drop-shadow(0 0 6px rgba(120, 200, 255, 0.6)); }
+  to { filter: drop-shadow(0 0 22px rgba(200, 240, 255, 0.95)); }
+}

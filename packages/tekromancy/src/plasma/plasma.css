@@ -1,0 +1,26 @@
+/**
+ * plasma.css - Ionized plasma & electromagnetic containment styles
+ * Part of @tekromancy/tekromancy
+ */
+
+.tekro-plasma-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9997;
+  mix-blend-mode: screen;
+}
+
+.plasma-element-containment {
+  box-shadow: 0 0 28px rgba(255, 0, 180, 0.75), inset 0 0 16px rgba(180, 50, 255, 0.5) !important;
+  border-color: rgba(255, 60, 200, 0.9) !important;
+  animation: plasma-pulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes plasma-pulse {
+  from { filter: drop-shadow(0 0 10px rgba(255, 0, 180, 0.6)); }
+  to { filter: drop-shadow(0 0 24px rgba(160, 40, 255, 0.95)); }
+}

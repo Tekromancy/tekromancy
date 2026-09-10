@@ -1,0 +1,99 @@
+{
+  "name": "@tekromancy/tekromancy",
+  "version": "0.1.1",
+  "description": "High-voltage procedural lightning and atmospheric visual FX engine for presentations and web applications",
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tekromancy/tekromancy.git"
+  },
+  "homepage": "https://tekromancy.com",
+  "bugs": {
+    "url": "https://github.com/Tekromancy/tekromancy/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "require": "./dist/tekromancy.umd.cjs",
+      "default": "./src/index.js"
+    },
+    "./lightning": {
+      "types": "./src/lightning/index.d.ts",
+      "import": "./src/lightning/index.js",
+      "default": "./src/lightning/index.js"
+    },
+    "./lightning.css": "./src/lightning/lightning.css",
+    "./fire": {
+      "types": "./src/fire/index.d.ts",
+      "import": "./src/fire/index.js",
+      "default": "./src/fire/index.js"
+    },
+    "./fire.css": "./src/fire/fire.css",
+    "./smoke": {
+      "types": "./src/smoke/index.d.ts",
+      "import": "./src/smoke/index.js",
+      "default": "./src/smoke/index.js"
+    },
+    "./smoke.css": "./src/smoke/smoke.css",
+    "./plasma": {
+      "types": "./src/plasma/index.d.ts",
+      "import": "./src/plasma/index.js",
+      "default": "./src/plasma/index.js"
+    },
+    "./plasma.css": "./src/plasma/plasma.css",
+    "./water": {
+      "types": "./src/water/index.d.ts",
+      "import": "./src/water/index.js",
+      "default": "./src/water/index.js"
+    },
+    "./water.css": "./src/water/water.css",
+    "./ice": {
+      "types": "./src/ice/index.d.ts",
+      "import": "./src/ice/index.js",
+      "default": "./src/ice/index.js"
+    },
+    "./ice.css": "./src/ice/ice.css",
+    "./highlight.css": "./src/core/highlight.css",
+    "./tekromancy.css": "./dist/tekromancy.css",
+    "./dist/*": "./dist/*"
+  },
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "vite build && cp src/lightning/lightning.css dist/lightning.css && cp src/fire/fire.css dist/fire.css && cp src/smoke/smoke.css dist/smoke.css && cp src/plasma/plasma.css dist/plasma.css && cp src/water/water.css dist/water.css && cp src/ice/ice.css dist/ice.css && cp src/core/highlight.css dist/highlight.css && cat src/lightning/lightning.css src/fire/fire.css src/smoke/smoke.css src/plasma/plasma.css src/water/water.css src/ice/ice.css src/core/highlight.css > dist/tekromancy.css",
+    "prepublishOnly": "npm run build",
+    "test": "node --check src/index.js && node --check src/lightning/index.js && node --check src/fire/index.js && node --check src/smoke/index.js && node --check src/plasma/index.js && node --check src/water/index.js && node --check src/ice/index.js && node --check src/core/index.js && node --check src/core/ElementHighlighter.js"
+  },
+  "keywords": [
+    "lightning",
+    "fire",
+    "smoke",
+    "plasma",
+    "water",
+    "ice",
+    "visual-fx",
+    "canvas",
+    "procedural",
+    "cyberpunk",
+    "presentation",
+    "impressjs",
+    "vfx",
+    "animation"
+  ],
+  "author": "Joshua Cox <joshua@tekromancy.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^8.2.2"
+  }
+}

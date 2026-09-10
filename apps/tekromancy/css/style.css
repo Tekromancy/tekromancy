@@ -1,0 +1,702 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;800;900&display=swap');
+
+:root {
+  --bg-primary: #060913;
+  --bg-card: rgba(12, 18, 36, 0.75);
+  --bg-card-hover: rgba(18, 26, 52, 0.85);
+  --border-cyan: rgba(0, 240, 255, 0.35);
+  --border-gold: rgba(255, 180, 0, 0.4);
+  --border-fire: rgba(255, 80, 0, 0.45);
+  --border-ice: rgba(140, 220, 255, 0.45);
+  --border-plasma: rgba(255, 0, 180, 0.45);
+  --border-smoke: rgba(160, 175, 195, 0.35);
+
+  --cyan: #00f0ff;
+  --fire: #ff6600;
+  --smoke: #cbd5e1;
+  --plasma: #ff00b4;
+  --water: #38bdf8;
+  --ice: #93c5fd;
+  --gold: #fbbf24;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  --font-main: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Orbitron', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+/* Background Cyber Grid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Screen Shake Animation on Warp Slam */
+.screen-impact-shake {
+  animation: screen-shake 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes screen-shake {
+  10%, 90% { transform: translate3d(-3px, 0, 0); }
+  20%, 80% { transform: translate3d(5px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* HUD Header Bar */
+#hud-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(6, 9, 19, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 10000;
+}
+
+.hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-status-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--cyan);
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hud-brand-tag {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.hud-center-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.hud-center-title span {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-btn {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.hud-btn:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.hud-btn.active-toggle {
+  background: var(--cyan);
+  color: #000;
+  border-color: var(--cyan);
+  font-weight: 700;
+}
+
+#hud-jump-menu {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* HUD Footer Progress Bar */
+#hud-footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: rgba(6, 9, 19, 0.92);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 10000;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+#hud-progress-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#hud-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--plasma), var(--fire));
+  transition: width 0.4s ease-out;
+}
+
+.hud-counter {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.hud-hints {
+  display: flex;
+  gap: 16px;
+  color: var(--text-muted);
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 10px;
+}
+
+/* IMPRESS SLIDE STEP COMMON */
+.step {
+  width: 1080px;
+  padding: 40px;
+  opacity: 0.2;
+  transition: opacity 0.8s ease, filter 0.8s ease;
+  filter: blur(3px);
+  position: relative;
+  z-index: 10;
+}
+
+.step.active {
+  opacity: 1;
+  filter: blur(0px);
+  z-index: 100;
+}
+
+/* Substeps (Incremental Reveal) */
+.step .substep {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.step .substep.substep-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cyber Cards & Grid */
+.cyber-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-cyan);
+  border-radius: 8px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.cyber-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+/* Typography Headings */
+h1.station-title {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+h2.section-heading {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+
+p.station-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.glow-cyan { color: var(--cyan); text-shadow: 0 0 12px rgba(0, 240, 255, 0.6); }
+.glow-fire { color: var(--fire); text-shadow: 0 0 12px rgba(255, 102, 0, 0.6); }
+.glow-plasma { color: var(--plasma); text-shadow: 0 0 12px rgba(255, 0, 180, 0.6); }
+.glow-water { color: var(--water); text-shadow: 0 0 12px rgba(56, 189, 248, 0.6); }
+.glow-ice { color: var(--ice); text-shadow: 0 0 12px rgba(147, 197, 253, 0.6); }
+
+/* Interactive Sandbox Control Deck */
+.interactive-deck {
+  background: rgba(10, 15, 30, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-top: 18px;
+}
+
+.deck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.deck-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.deck-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fx-trigger-btn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid var(--cyan);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fx-trigger-btn:hover {
+  background: var(--cyan);
+  color: #000;
+  box-shadow: 0 0 16px var(--cyan);
+  transform: translateY(-1px);
+}
+
+.fx-trigger-btn.btn-fire {
+  background: rgba(255, 102, 0, 0.15);
+  border-color: var(--fire);
+}
+.fx-trigger-btn.btn-fire:hover {
+  background: var(--fire);
+  color: #000;
+  box-shadow: 0 0 16px var(--fire);
+}
+
+.fx-trigger-btn.btn-smoke {
+  background: rgba(160, 175, 195, 0.15);
+  border-color: var(--smoke);
+}
+.fx-trigger-btn.btn-smoke:hover {
+  background: var(--smoke);
+  color: #000;
+  box-shadow: 0 0 16px var(--smoke);
+}
+
+.fx-trigger-btn.btn-plasma {
+  background: rgba(255, 0, 180, 0.15);
+  border-color: var(--plasma);
+}
+.fx-trigger-btn.btn-plasma:hover {
+  background: var(--plasma);
+  color: #000;
+  box-shadow: 0 0 16px var(--plasma);
+}
+
+.fx-trigger-btn.btn-water {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--water);
+}
+.fx-trigger-btn.btn-water:hover {
+  background: var(--water);
+  color: #000;
+  box-shadow: 0 0 16px var(--water);
+}
+
+.fx-trigger-btn.btn-ice {
+  background: rgba(147, 197, 253, 0.15);
+  border-color: var(--ice);
+}
+.fx-trigger-btn.btn-ice:hover {
+  background: var(--ice);
+  color: #000;
+  box-shadow: 0 0 16px var(--ice);
+}
+
+/* Code Snippet Blocks */
+pre.code-box {
+  background: rgba(6, 9, 19, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e2e8f0;
+  overflow-x: auto;
+}
+
+.code-keyword { color: #f43f5e; }
+.code-func { color: #38bdf8; }
+.code-str { color: #a3e635; }
+.code-comment { color: #64748b; font-style: italic; }
+
+/* ORBITAL GATEWAY (Station 0) */
+#tekromancy-portal {
+  text-align: center;
+}
+
+.portal-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid var(--border-cyan);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.portal-hero-title {
+  font-family: var(--font-display);
+  font-size: 58px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #fff 30%, var(--cyan) 70%, var(--plasma) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 14px;
+}
+
+.portal-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 36px auto;
+  line-height: 1.6;
+}
+
+.start-btn {
+  background: linear-gradient(135deg, var(--cyan), var(--plasma));
+  color: #000;
+  border: none;
+  padding: 16px 36px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+}
+
+/* =========================================================================
+   3D CYBERPUNK GLOBE IN-DOM MESH (Centered at 0, 0, 0 inside #impress)
+   ========================================================================= */
+.cyber-globe-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.globe-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  box-sizing: border-box;
+}
+
+/* Equatorial Ring: 18,000px diameter (Radius = 9,000px) */
+.globe-ring-equator {
+  width: 18000px;
+  height: 18000px;
+  margin-top: -9000px;
+  margin-left: -9000px;
+  transform: rotateX(90deg);
+  border: 2px solid rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 50px rgba(0, 240, 255, 0.3), inset 0 0 50px rgba(0, 240, 255, 0.2);
+}
+
+/* Longitude Meridians (18,000px diameter) */
+.globe-ring-meridian-0 {
+  width: 18000px;
+  height: 18000px;
+  margin-top: -9000px;
+  margin-left: -9000px;
+  transform: rotateY(0deg);
+  border: 1.5px solid rgba(0, 240, 255, 0.22);
+}
+
+.globe-ring-meridian-45 {
+  width: 18000px;
+  height: 18000px;
+  margin-top: -9000px;
+  margin-left: -9000px;
+  transform: rotateY(45deg);
+  border: 1.5px solid rgba(0, 240, 255, 0.18);
+}
+
+.globe-ring-meridian-90 {
+  width: 18000px;
+  height: 18000px;
+  margin-top: -9000px;
+  margin-left: -9000px;
+  transform: rotateY(90deg);
+  border: 1.5px solid rgba(255, 0, 180, 0.25);
+  box-shadow: 0 0 40px rgba(255, 0, 180, 0.15);
+}
+
+.globe-ring-meridian-135 {
+  width: 18000px;
+  height: 18000px;
+  margin-top: -9000px;
+  margin-left: -9000px;
+  transform: rotateY(135deg);
+  border: 1.5px solid rgba(0, 240, 255, 0.18);
+}
+
+/* Latitude Bands (+30° North, -30° South) */
+.globe-ring-lat-north {
+  width: 15588px;
+  height: 15588px;
+  margin-top: -7794px;
+  margin-left: -7794px;
+  transform: translateY(-4225px) rotateX(90deg);
+  border: 1.5px solid rgba(0, 240, 255, 0.22);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.12);
+}
+
+.globe-ring-lat-south {
+  width: 15588px;
+  height: 15588px;
+  margin-top: -7794px;
+  margin-left: -7794px;
+  transform: translateY(4225px) rotateX(90deg);
+  border: 1.5px solid rgba(0, 240, 255, 0.22);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.12);
+}
+
+/* Tilted Orbital Ring */
+.globe-ring-orbital {
+  width: 19600px;
+  height: 19600px;
+  margin-top: -9800px;
+  margin-left: -9800px;
+  transform: rotateX(68deg) rotateY(28deg);
+  border: 2px dashed rgba(251, 191, 36, 0.45);
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.25);
+  animation: orbital-rotate 160s linear infinite;
+}
+
+@keyframes orbital-rotate {
+  from { transform: rotateX(68deg) rotateY(28deg) rotateZ(0deg); }
+  to   { transform: rotateX(68deg) rotateY(28deg) rotateZ(360deg); }
+}
+
+/* Central Cyber Core at (0, 0, 0) */
+.globe-core-beacon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 1200px;
+  margin-top: -600px;
+  margin-left: -600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.4) 0%, rgba(255, 0, 180, 0.2) 40%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* =========================================================================
+   STATION 10: CONSTELLATION OVERVIEW STYLING
+   ========================================================================= */
+#overview {
+  width: 1200px;
+  padding: 44px 50px;
+  background: rgba(6, 12, 28, 0.88);
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 0 80px rgba(0, 240, 255, 0.35), inset 0 0 35px rgba(0, 240, 255, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.overview-header-zone {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.overview-telemetry-strip {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 6px;
+}
+
+.overview-telemetry-strip span strong {
+  color: #fff;
+}
+
+.constellation-stations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.orbital-node-card {
+  background: rgba(12, 20, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.orbital-node-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+  background: rgba(18, 30, 60, 0.95);
+}
+
+.orbital-node-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.orbital-node-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.orbital-node-glyph {
+  font-size: 16px;
+}
+
+.orbital-node-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.orbital-node-coords {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
