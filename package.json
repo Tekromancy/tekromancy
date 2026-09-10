@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "description": "Tekromancy Monorepo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tekromancy/tekromancy.git"
+  },
+  "homepage": "https://tekromancy.com",
+  "bugs": {
+    "url": "https://github.com/Tekromancy/tekromancy/issues"
+  },
   "scripts": {
     "dev": "pnpm --filter impressctf dev",
     "dev:impressctf": "pnpm --filter impressctf dev",

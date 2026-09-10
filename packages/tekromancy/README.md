@@ -3,9 +3,20 @@
 > High-voltage procedural visual effects engine for presentations, interactive web applications, and cybernetic user interfaces. Includes **Lightning**, **Fire**, **Smoke**, **Plasma**, **Water**, **Ice**, and **Unified Multi-Element Orchestrators**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Tekromancy%2Ftekromancy-blue?logo=github)](https://github.com/Tekromancy/tekromancy)
+[![npm version](https://img.shields.io/npm/v/@tekromancy/tekromancy.svg)](https://www.npmjs.com/package/@tekromancy/tekromancy)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)]()
-[![npm version](https://img.shields.io/npm/v/@tekromancy/tekromancy.svg)](https://www.npmjs.com/package/@tekromancy/tekromancy)
+
+---
+
+## 🔗 Repository & Links
+
+- **Main Repository**: [https://github.com/Tekromancy/tekromancy](https://github.com/Tekromancy/tekromancy)
+- **NPM Package**: [https://www.npmjs.com/package/@tekromancy/tekromancy](https://www.npmjs.com/package/@tekromancy/tekromancy)
+- **Official Website**: [https://tekromancy.com](https://tekromancy.com)
+- **Monorepo Package Source**: [`packages/tekromancy`](https://github.com/Tekromancy/tekromancy/tree/main/packages/tekromancy)
+- **Interactive 3D Showcase**: [`apps/tekromancy`](https://github.com/Tekromancy/tekromancy/tree/main/apps/tekromancy)
 
 ---
 
@@ -329,6 +340,8 @@ import '@tekromancy/tekromancy/ice.css';
 
 ---
 
-## 📄 License
-
-MIT © Joshua Cox / [Tekromancy](https://tekromancy.com)
+## 📄 License & Repository
+ 
+- **GitHub Repository**: [https://github.com/Tekromancy/tekromancy](https://github.com/Tekromancy/tekromancy)
+- **Issue Tracker**: [https://github.com/Tekromancy/tekromancy/issues](https://github.com/Tekromancy/tekromancy/issues)
+- **License**: MIT © [Joshua Edward McLaughlin Cox](https://github.com/coxjosh) / [Tekromancy](https://tekromancy.com)

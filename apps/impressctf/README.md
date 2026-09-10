@@ -1,25 +1,43 @@
 # The Crucible of Hackers 🏴‍☠️
 ### The History of CTFs, Red vs. Blue Teaming, and Open-Source Cyber Ranges
-*An interactive 3D [impress.js](https://impress.js.org/) presentation.*
+*An interactive 3D [impress.js](https://impress.js.org/) presentation powered by [@tekromancy/tekromancy](https://www.npmjs.com/package/@tekromancy/tekromancy).*
 
-Inspired by the Tekromancy article: **"The Crucible of Hackers: The History of CTFs, Red vs. Blue Teaming, and Open-Source Lab Frameworks"** (`blog/src/content/blog/history-of-ctf-red-blue-teaming.md`) by Joshua Edward McLaughlin Cox.
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Tekromancy%2Ftekromancy-blue?logo=github)](https://github.com/Tekromancy/tekromancy)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Part of Tekromancy Monorepo](https://img.shields.io/badge/monorepo-apps%2Fimpressctf-purple.svg)](https://github.com/Tekromancy/tekromancy)
+
+Inspired by the Tekromancy article: **"The Crucible of Hackers: The History of CTFs, Red vs. Blue Teaming, and Open-Source Lab Frameworks"** by Joshua Edward McLaughlin Cox.
+
+---
+
+## 🔗 Repository & Links
+
+- **Main Monorepo**: [https://github.com/Tekromancy/tekromancy](https://github.com/Tekromancy/tekromancy)
+- **NPM Package**: [https://www.npmjs.com/package/@tekromancy/tekromancy](https://www.npmjs.com/package/@tekromancy/tekromancy)
+- **Official Website**: [https://tekromancy.com](https://tekromancy.com)
 
 ---
 
 ## ⚡ Quick Start
 
-### 1. Launch with Vite (Local Dev Server)
+### 1. Launch via Monorepo Root (Recommended)
 ```bash
-cd /mnt/unreal/git/tekromancy/impressctf
-pnpm install
-pnpm dev
+# From the monorepo root:
+pnpm run dev:impressctf
 ```
 Open `http://localhost:5173` in your browser.
 
-### 2. Build for Production / Static Hosting
+### 2. Launch from Application Directory
 ```bash
-pnpm build
-pnpm preview
+cd apps/impressctf
+pnpm install
+pnpm dev
+```
+
+### 3. Build for Production / Static Hosting
+```bash
+pnpm run build:impressctf
+pnpm run preview:impressctf
 ```
 The static distribution is output to `./dist` and is ready for any static web host (GitHub Pages, Cloudflare Pages, Nginx, Apache).
 
@@ -75,3 +93,11 @@ Open `http://localhost:8080` in your browser.
 - **Procedural Audio Synthesizer (`js/audio-fx.js`):** Pure Web Audio API synthesizing 3D warp whooshes, terminal clicks, and alert sirens with zero external audio assets.
 - **HUD Overlay (`js/presentation.js`):** Glassmorphic top and bottom bars with live progress tracking, station title readout, autoplay timer, and jump selector.
 - **Terminal Simulator:** High-fidelity CRT terminal windows with color-coded commands, parameter highlights, and simulated bash/docker traces.
+
+---
+
+## 📄 License & Repository
+
+- **GitHub Repository:** [https://github.com/Tekromancy/tekromancy](https://github.com/Tekromancy/tekromancy)
+- **License:** MIT © [Joshua Edward McLaughlin Cox](https://github.com/coxjosh) / [Tekromancy](https://tekromancy.com)
+

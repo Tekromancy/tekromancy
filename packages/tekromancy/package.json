@@ -1,6 +1,6 @@
 {
   "name": "@tekromancy/tekromancy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "High-voltage procedural lightning and atmospheric visual FX engine for presentations and web applications",
   "type": "module",
   "main": "./src/index.js",
@@ -11,7 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tekromancy/tekromancy.git"
+    "url": "git+https://github.com/Tekromancy/tekromancy.git",
+    "directory": "packages/tekromancy"
   },
   "homepage": "https://tekromancy.com",
   "bugs": {
